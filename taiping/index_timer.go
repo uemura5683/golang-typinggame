@@ -88,13 +88,12 @@ func main() {
     }
 }
 
-// 非同期処理
-// バイト列を読み出すためのインターフェース
+// 入力コードを読み出すためのインターフェース
 func input(Stdin io.Reader) <-chan string {
     channel := make(chan string)
     go func() {
         strings := bufio.NewScanner(Stdin)
-        if strings.Scan() {
+        for strings.Scan() {
             channel <- strings.Text()
         }
     }()
